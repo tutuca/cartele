@@ -1,15 +1,15 @@
+# -*- coding: utf-8 -*-
 import settings
 from flask import Flask, request, url_for, redirect, render_template, flash, session, g
 from flaskext.sqlalchemy import SQLAlchemy, BaseQuery
 from flaskext.uploads import UploadSet, configure_uploads, IMAGES
-from flaskext.debugtoolbar import DebugToolbarExtension
+from werkzeug import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 app.config.from_object(settings)
 
 db = SQLAlchemy(app)
-toolbar = DebugToolbarExtension(app)
-
 uploaded_files = UploadSet('files', IMAGES)
 configure_uploads(app, uploaded_files)
 
@@ -110,6 +110,25 @@ def upload():
         return redirect(url_for('index'))
     return render_template('upload.html', authors=authors)
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        password = request.form.get('password')
+        username = request.form.get('name')
+        user = User.query.filter_by(username=username).first()
+        if user.check_password(password):
+            flash(u'Bienvenido %s' %username)
+            session['username'] = username
+            return redirect(url_for('index'))
+        else: 
+            flash(u'Usuario o contraseña incorrecto')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 def syncdb(app):
     with app.test_request_context():

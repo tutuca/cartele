@@ -2,23 +2,24 @@
 {% block title %}Cargar nuevo banner{% endblock %}
 {% block body %}
 <form action="/upload" method="post">
-        <p id="destination-field" class="field">
-            <label for="destination">Destino</label>
-            <input type="text" name="destination" value="" id="destination" />
-        </p>
-        <p id="author-field" class="field">
-            <label for="author">Autor</label>
-            <select name="author">
-                {% for author in authors %}
-                <option value="{{author.id}}">{{author.name}}</option>                    
-                {% endfor %}
+    <input type="hidden" name="user" value="session.username" id="" />
+    <p id="destination-field" class="field">
+        <label for="destination">Destino</label>
+        <input type="text" name="destination" value="" id="destination" />
+    </p>
+    <p id="author-field" class="field">
+        <label for="author">Autor</label>
+        <select name="author">
+            {% for author in authors %}
+            <option value="{{author.id}}">{{author.name}}</option>                    
+            {% endfor %}
 
-            </select>
-        </p>
-        <p id="image-field" class="field">
-            <label for="image">Archivo</label>
-            <input type="file" name="image" value="" id="image" />
-        </p>
-        <p><input type="submit" value="Guardar" /></p>
+        </select>
+    </p>
+    <p id="image-field" class="field">
+        <label for="image">Archivo</label>
+        <input type="file" name="image" value="" id="image" />
+    </p>
+    <p><input type="submit" value="Guardar" /></p>
 </form>
 {% endblock %}

@@ -13,9 +13,10 @@
             margin:0;
             padding:1em;
         }
-        h1 {
+        h1, h2 {
             font-weight: normal;
         }
+
         #messages {
             text-align:left;
             background: #FE9;
@@ -65,6 +66,11 @@
   {% endif %}
 {% endwith %}
     <ul id="nav">
+        {% if session.username %}
+        <li><strong>{{session.username}}</strong> <a href="/logout">salir</a></li>
+        {% else%}
+        <li><a href="/login">Ingresar</a></li>
+        {%endif%}
         <li><a href="/author">Nuevo author</a></li>
         <li><a href="/upload">Nuevo banner</a></li>
     </ul>
