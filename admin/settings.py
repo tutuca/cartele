@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
+BASE_DIR = os.path.dirname(__file__)
 
 DEBUG = False
 
@@ -17,6 +18,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
 
 SECRET_KEY = '7$57#ttr-tzqr*dt$l7vac0xt&1+i=gi^-y8bnsba$i%ci^nrd'
 
-UPLOADED_FILES_DEST = 'banners'
+UPLOAD_FOLDER = '%s/banners' %BASE_DIR
 
 from local_settings import *
