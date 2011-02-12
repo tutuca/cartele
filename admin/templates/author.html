@@ -2,13 +2,14 @@
 {% block title %}Autor{% endblock %}
 {% block body %}
 <form action="/author" method="post">
+    {{ form.csrf }}
     <p id="name-field" class="field">
         <label for="name">Nombre</label>
-        <input type="text" name="name" value="" id="name" />
+        {{form.name}}
     </p>
     <p id="email-field" class="field">
         <label for="email">E-Mail</label>
-        <input type="text" name="email" value="" id="email" />
+        {{form.email}}
     </p>
     <p><input type="submit" value="Guardar" /></p>
 {% endblock %}
